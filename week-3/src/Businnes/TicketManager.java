@@ -2,10 +2,9 @@ package Businnes;
 
 import Data.TicketData;
 import Models.Ticket;
-import Models.enums.Company;
+import Models.enums.CompanyType;
 import Models.enums.JourneyType;
-import Models.planeCompanies.Pegasus;
-import Models.planeCompanies.THY;
+import Models.planeCompanies.*;
 
 public class TicketManager {
     THY thy;
@@ -17,34 +16,48 @@ public class TicketManager {
 
     }
 
-    private void ticketControl(Ticket ticket){
-        if (seatControl(ticket)){
-            if (ticket.getCompany().equals(Company.THY)){
-                thy = new THY(ticket);
-                thy.provideFoodAndBeverageService();
-            }else{
-                pegasus = new Pegasus(ticket);
-                if (ticket.getJourneyType().equals(JourneyType.ABROAD)){
-                    pegasus.provideFoodAndBeverageService();
+    private void ticketControl(Ticket ticket) {
+        boolean isEconomy = isEconomy(ticket);
+        if (seatControl(ticket)) {
+            if (ticket.getCompanyType().equals(CompanyType.THY)) {
+                thy = new THY(ticket, isEconomy);
+                thy.foodAndBeverageService();
+            } else {
+                pegasus = new Pegasus(ticket, isEconomy);
+                if (ticket.getJourneyType().equals(JourneyType.ABROAD)) {
+                    pegasus.foodAndBeverageService();
                 }
             }
-        }else{
+        } else {
             System.out.println("Seçtiğiniz koltuk doludur. Lütfen boş bir koltuk seçiniz.");
         }
 
 
     }
 
-    private boolean seatControl(Ticket ticket){
+    private boolean seatControl(Ticket ticket) {
         data = new TicketData();
         boolean isEmpty;
 
-        if (ticket.getCompany().equals(Company.PEGASUS)){
+        if (ticket.getCompanyType().equals(CompanyType.PEGASUS)) {
             isEmpty = data.getTicketsPegasus().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
-        }else {
+        } else {
             isEmpty = data.getTicketsTHY().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
         }
 
         return !isEmpty;
+    }
+
+    public boolean isEconomy(Ticket ticket) {
+        boolean isEconomy = true;
+
+        for (char i = 'A'; i <= 'C'; i++) {
+            for (int j = 1; j <= 3; j++) {
+                if (ticket.getSeatNo().equals(i + "" + j)){
+                    isEconomy = false;
+                }
+            }
+        }
+        return isEconomy;
     }
 }

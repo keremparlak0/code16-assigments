@@ -1,6 +1,6 @@
 package Data;
 
-import Models.enums.Company;
+import Models.enums.CompanyType;
 import Models.enums.JourneyType;
 import Models.Ticket;
 import lombok.Getter;
@@ -19,19 +19,19 @@ public class TicketData {
                 "A2",
                 "Ahmet YILMAZ",
                 "12345678901",
-                Company.THY,
+                CompanyType.THY,
                 JourneyType.DOMESTIC));
         ticketsPegasus.add(new Ticket(
                 "B2",
                 "Ayşe DEMİR",
                 "23456789012",
-                Company.PEGASUS,
+                CompanyType.PEGASUS,
                 JourneyType.ABROAD));
         ticketsTHY.add(new Ticket(
                 "C3",
                 "Mehmet ÖZTÜRK",
                 "34567890123",
-                Company.THY,
+                CompanyType.THY,
                 JourneyType.DOMESTIC));
     }
 

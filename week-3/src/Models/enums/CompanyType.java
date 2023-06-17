@@ -1,6 +1,6 @@
 package Models.enums;
 
-public enum Company {
+public enum CompanyType {
     PEGASUS,
     THY
 }
