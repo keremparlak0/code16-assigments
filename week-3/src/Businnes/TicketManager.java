@@ -2,8 +2,7 @@ package Businnes;
 
 import Data.TicketData;
 import Models.Ticket;
-import Models.enums.CompanyType;
-import Models.enums.JourneyType;
+import Models.enums.*;
 import Models.planeCompanies.*;
 
 public class TicketManager {
@@ -37,15 +36,13 @@ public class TicketManager {
 
     private boolean seatControl(Ticket ticket) {
         data = new TicketData();
-        boolean isEmpty;
 
         if (ticket.getCompanyType().equals(CompanyType.PEGASUS)) {
-            isEmpty = data.getTicketsPegasus().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
+            return data.getTicketsPegasus().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
         } else {
-            isEmpty = data.getTicketsTHY().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
+            return data.getTicketsTHY().stream().anyMatch(t -> ticket.getSeatNo().equals(t.getSeatNo()));
         }
 
-        return !isEmpty;
     }
 
     public boolean isEconomy(Ticket ticket) {

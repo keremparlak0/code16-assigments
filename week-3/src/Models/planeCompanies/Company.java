@@ -10,4 +10,5 @@ public abstract class Company {
     }
 
     abstract void foodAndBeverageService();
+    abstract int getPrice(boolean isEconomy);
 }

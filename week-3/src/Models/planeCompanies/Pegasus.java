@@ -17,6 +17,7 @@ public class Pegasus extends Company {
         System.out.println("Yiyecek ve içecek servisimiz vardır.");
     }
 
+    @Override
     public int getPrice(boolean isEconomy) {
         if (isEconomy) {
             return price;
